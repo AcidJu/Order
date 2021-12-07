@@ -1,7 +1,53 @@
 package com.example.eurder.domain.user;
 
-import static org.junit.jupiter.api.Assertions.*;
+import com.example.eurder.domain.address.Address;
+import com.example.eurder.domain.emailAddress.EmailAddress;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import java.util.UUID;
 
 class UserTest {
+
+    Address address;
+
+    @BeforeEach
+    public void init() {
+        address = Address.AddressBuilder.addressBuilder()
+                .withCity("Rixensart")
+                .withPostCode("1330")
+                .withStreetName("Avenue Alexandre")
+                .withStreetNumber("2")
+                .build();
+    }
+
+    @Test
+    public void builderTest() {
+        //Given
+        User user = User.UserBuilder.userBuilder()
+                .withAddress(address)
+                .withEmailAddress(new EmailAddress("julian", "gmail.com"))
+                .withLastname("Masoin")
+                .withFirstname("Julian")
+                .withPhoneNumber("+32479525650")
+                .build();
+
+        Address addressExpected = Address.AddressBuilder.addressBuilder()
+                .withCity("Rixensart")
+                .withPostCode("1330")
+                .withStreetName("Avenue Alexandre")
+                .withStreetNumber("2")
+                .build();
+
+        //Then
+        Assertions.assertEquals(UUID.class, user.getId().getClass());
+        Assertions.assertEquals(addressExpected, user.getAddress());
+        Assertions.assertEquals(new EmailAddress("julian", "gmail.com"), user.getEmailAddress());
+        Assertions.assertEquals("Julian", user.getFirstname());
+        Assertions.assertEquals("Masoin", user.getLastname());
+        Assertions.assertEquals("+32479525650", user.getPhoneNumber());
+
+    }
 
 }

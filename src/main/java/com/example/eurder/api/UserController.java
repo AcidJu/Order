@@ -23,6 +23,7 @@ public class UserController {
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
     public UserDto registerMember(@RequestBody CreateUserDto newMember) {
+        logger.debug("Method not working");
         return userService.addNewMember(newMember);
     }
 }

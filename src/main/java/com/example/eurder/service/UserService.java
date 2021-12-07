@@ -5,7 +5,6 @@ import com.example.eurder.repository.UserRepository;
 import com.example.eurder.service.dtos.CreateUserDto;
 import com.example.eurder.service.dtos.UserDto;
 import com.example.eurder.service.mappers.UserMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
