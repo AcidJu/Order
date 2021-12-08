@@ -1,5 +1,7 @@
 package com.example.eurder.api;
 
+import com.example.eurder.domain.user.Feature;
+import com.example.eurder.service.SecurityService;
 import com.example.eurder.service.UserService;
 import com.example.eurder.service.dtos.CreateUserDto;
 import com.example.eurder.service.dtos.UserDto;
@@ -20,10 +22,12 @@ import java.util.stream.Collectors;
 public class UserController {
 
     private final UserService userService;
+    private final SecurityService securityService;
     private final Logger logger = LoggerFactory.getLogger(UserController.class);
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, SecurityService securityService) {
         this.userService = userService;
+        this.securityService = securityService;
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -35,13 +39,15 @@ public class UserController {
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, path = "customers")
     @ResponseStatus(HttpStatus.OK)
-    public List<UserDto> getAllUsers() {
+    public List<UserDto> getAllUsers(@RequestHeader String authorization) {
+        securityService.validateAccess(authorization, Feature.SHOW_ALL_CUSTOMER);
         return userService.getAllUser();
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, path = "customers/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public UserDto getUser(@PathVariable("id") UUID id) {
+    public UserDto getUser(@PathVariable("id") UUID id, @RequestHeader String authorization) {
+        securityService.validateAccess(authorization, Feature.SHOW_ALL_CUSTOMER);
         return userService.getCustomerById(id);
     }
 }

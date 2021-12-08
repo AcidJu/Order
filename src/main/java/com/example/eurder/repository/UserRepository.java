@@ -30,4 +30,12 @@ public class UserRepository {
     public User getUserById(UUID id) {
         return users.get(id);
     }
+
+    public User getUserByEmail(String email) {
+        return users.values().stream()
+                .filter(user -> user.getEmailAddress()
+                        .toString()
+                        .equals(email))
+                .findFirst().orElse(null);
+    }
 }
