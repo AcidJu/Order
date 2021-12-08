@@ -26,11 +26,14 @@ class UserTest {
     public void builderTest() {
         //Given
         User user = User.UserBuilder.userBuilder()
+                .withId()
                 .withAddress(address)
                 .withEmailAddress(new EmailAddress("julian", "gmail.com"))
                 .withLastname("Masoin")
                 .withFirstname("Julian")
                 .withPhoneNumber("+32479525650")
+                .withRole(User.Role.CUSTOMER)
+                .withPassword("123456")
                 .build();
 
         Address addressExpected = Address.AddressBuilder.addressBuilder()
@@ -47,6 +50,8 @@ class UserTest {
         Assertions.assertEquals("Julian", user.getFirstname());
         Assertions.assertEquals("Masoin", user.getLastname());
         Assertions.assertEquals("+32479525650", user.getPhoneNumber());
+        Assertions.assertEquals("123456", user.getPassword());
+        Assertions.assertEquals(User.Role.CUSTOMER, user.getRole());
 
     }
 

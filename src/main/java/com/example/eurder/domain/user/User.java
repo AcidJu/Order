@@ -36,14 +36,14 @@ public class User {
     }
 
     public User(UserBuilder builder) {
-        id = UUID.randomUUID();
+        id = builder.id;
         firstname = builder.firstname;
         lastname = builder.lastname;
         emailAddress = builder.emailAddress;
         address = builder.address;
         phoneNumber = builder.phoneNumber;
-        role = builder.build().role;
-        password = builder.build().password;
+        role = builder.role;
+        password = builder.password;
     }
 
 
@@ -69,8 +69,8 @@ public class User {
             return new UserBuilder();
         }
 
-        public UserBuilder withId(UUID id) {
-            this.id = id;
+        public UserBuilder withId() {
+            this.id = UUID.randomUUID();
             return this;
         }
 
@@ -109,6 +109,10 @@ public class User {
             return this;
         }
 
+    }
+
+    public Role getRole() {
+        return role;
     }
 
     public UUID getId() {
