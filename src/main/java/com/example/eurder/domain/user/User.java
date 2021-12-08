@@ -3,6 +3,7 @@ package com.example.eurder.domain.user;
 import com.example.eurder.domain.address.Address;
 import com.example.eurder.domain.emailAddress.EmailAddress;
 
+import java.util.Objects;
 import java.util.UUID;
 
 public class User {
@@ -22,7 +23,6 @@ public class User {
         phoneNumber = builder.phoneNumber;
     }
 
-
     public static final class UserBuilder {
         private UUID id;
         private String firstname;
@@ -40,6 +40,11 @@ public class User {
 
         public static UserBuilder userBuilder() {
             return new UserBuilder();
+        }
+
+        public UserBuilder withId(UUID id) {
+            this.id = id;
+            return this;
         }
 
         public UserBuilder withFirstname(String firstname) {
@@ -91,5 +96,29 @@ public class User {
 
     public String getPhoneNumber() {
         return phoneNumber;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(id, user.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", firstName='" + firstname + '\'' +
+                ", lastName='" + lastname + '\'' +
+                ", emailAddress=" + emailAddress +
+                ", address=" + address +
+                '}';
     }
 }

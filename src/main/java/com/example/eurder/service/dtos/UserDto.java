@@ -2,9 +2,12 @@ package com.example.eurder.service.dtos;
 
 import com.example.eurder.domain.address.Address;
 import com.example.eurder.domain.emailAddress.EmailAddress;
+import com.example.eurder.domain.user.User;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import java.util.UUID;
 
+@JsonSerialize
 public class UserDto {
 
     private UUID id;
@@ -12,13 +15,15 @@ public class UserDto {
     private String lastname;
     private EmailAddress emailAddress;
     private Address address;
+    private String phoneNumber;
 
     public UUID getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public UserDto setId(UUID id) {
         this.id = id;
+        return this;
     }
 
     public String getFirstname() {
@@ -54,6 +59,15 @@ public class UserDto {
 
     public UserDto setAddress(Address address) {
         this.address = address;
+        return this;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public UserDto setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
         return this;
     }
 }

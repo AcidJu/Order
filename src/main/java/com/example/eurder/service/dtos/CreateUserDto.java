@@ -9,6 +9,15 @@ public class CreateUserDto {
     private String lastname;
     private EmailAddress emailAddress;
     private Address address;
+    private String phoneNumber;
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
 
     public String getFirstname() {
         return firstname;
@@ -40,5 +49,15 @@ public class CreateUserDto {
 
     public void setAddress(Address address) {
         this.address = address;
+    }
+
+    @Override
+    public String toString() {
+        return "CreateUserDto{" +
+                "firstName='" + firstname + '\'' +
+                ", lastName='" + lastname + '\'' +
+                ", emailAddress=" + emailAddress +
+                ", address=" + address +
+                '}';
     }
 }

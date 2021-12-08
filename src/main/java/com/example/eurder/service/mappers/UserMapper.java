@@ -14,15 +14,17 @@ public class UserMapper {
                 .withLastname(createUserDto.getLastname())
                 .withEmailAddress(createUserDto.getEmailAddress())
                 .withAddress(createUserDto.getAddress())
+                .withPhoneNumber(createUserDto.getPhoneNumber())
                 .build();
     }
 
     public UserDto mapUserToUserDto(User user) {
         return new UserDto()
+                .setId(user.getId())
                 .setFirstname(user.getFirstname())
                 .setLastname(user.getLastname())
                 .setEmailAddress(user.getEmailAddress())
-                .setAddress(user.getAddress());
-
+                .setAddress(user.getAddress())
+                .setPhoneNumber(user.getPhoneNumber());
     }
 }
