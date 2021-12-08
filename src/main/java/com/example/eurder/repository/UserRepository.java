@@ -26,4 +26,8 @@ public class UserRepository {
         return users.values().stream().collect(Collectors.toList());
 
     }
+
+    public User getUserById(UUID id) {
+        return users.get(id);
+    }
 }
