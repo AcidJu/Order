@@ -2,6 +2,7 @@ package com.example.eurder.service.dtos;
 
 import com.example.eurder.domain.address.Address;
 import com.example.eurder.domain.emailAddress.EmailAddress;
+import com.example.eurder.domain.role.Role;
 
 import java.util.UUID;
 
@@ -12,13 +13,16 @@ public class UserDto {
     private String lastname;
     private EmailAddress emailAddress;
     private Address address;
+    private Role role;
+    private String phoneNumber;
 
     public UUID getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public UserDto setId(UUID id) {
         this.id = id;
+        return this;
     }
 
     public String getFirstname() {
@@ -54,6 +58,24 @@ public class UserDto {
 
     public UserDto setAddress(Address address) {
         this.address = address;
+        return this;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public UserDto setRole(Role role) {
+        this.role = role;
+        return this;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public UserDto setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
         return this;
     }
 }

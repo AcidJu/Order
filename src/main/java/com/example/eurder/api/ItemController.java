@@ -8,7 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("items")
+@RequestMapping(path = "items")
 public class ItemController {
 
     private ItemService itemService;
