@@ -10,11 +10,11 @@ public class Item {
     private int amount;
 
     public Item(ItemBuilder builder) {
-        this.id = builder.id;
-        this.name = builder.name;
-        this.description = builder.description;
-        this.price = builder.price;
-        this.amount = builder.amount;
+        id = UUID.randomUUID();
+        name = builder.name;
+        description = builder.description;
+        price = builder.price;
+        amount = builder.amount;
     }
 
     public UUID getId() {

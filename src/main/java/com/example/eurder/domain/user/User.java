@@ -3,7 +3,9 @@ package com.example.eurder.domain.user;
 import com.example.eurder.domain.address.Address;
 import com.example.eurder.domain.emailAddress.EmailAddress;
 
+import java.util.Objects;
 import java.util.UUID;
+import java.util.List;
 
 public class User {
     private UUID id;
@@ -12,15 +14,38 @@ public class User {
     private EmailAddress emailAddress;
     private Address address;
     private String phoneNumber;
+    private Role role;
+    private String password;
+
+    public enum Role {
+        CUSTOMER,
+        ADMIN(List.of(Feature.REGISTER_USER, Feature.ADD_ITEM, Feature.SHOW_ALL_CUSTOMER, Feature.SHOW_ONE_CUSTOMER));
+
+        Role() {
+        }
+
+        private List<Feature> featureList;
+
+        Role(List<Feature> featureList) {
+            this.featureList = featureList;
+        }
+
+        public boolean containsFeature(Feature feature) {
+            return featureList.contains(feature);
+        }
+    }
 
     public User(UserBuilder builder) {
-        id = UUID.randomUUID();
+        id = builder.id;
         firstname = builder.firstname;
         lastname = builder.lastname;
         emailAddress = builder.emailAddress;
         address = builder.address;
         phoneNumber = builder.phoneNumber;
+        role = builder.role;
+        password = builder.password;
     }
+
 
 
     public static final class UserBuilder {
@@ -30,6 +55,8 @@ public class User {
         private EmailAddress emailAddress;
         private Address address;
         private String phoneNumber;
+        private Role role;
+        private String password;
 
         private UserBuilder() {
         }
@@ -40,6 +67,11 @@ public class User {
 
         public static UserBuilder userBuilder() {
             return new UserBuilder();
+        }
+
+        public UserBuilder withId() {
+            this.id = UUID.randomUUID();
+            return this;
         }
 
         public UserBuilder withFirstname(String firstname) {
@@ -67,6 +99,20 @@ public class User {
             return this;
         }
 
+        public UserBuilder withRole(Role role) {
+            this.role = role;
+            return this;
+        }
+
+        public UserBuilder withPassword(String password) {
+            this.password = password;
+            return this;
+        }
+
+    }
+
+    public Role getRole() {
+        return role;
     }
 
     public UUID getId() {
@@ -91,5 +137,37 @@ public class User {
 
     public String getPhoneNumber() {
         return phoneNumber;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public boolean hasAccessTo(Feature feature) {
+        return this.role.containsFeature(feature);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(id, user.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", firstName='" + firstname + '\'' +
+                ", lastName='" + lastname + '\'' +
+                ", emailAddress=" + emailAddress +
+                ", address=" + address +
+                '}';
     }
 }

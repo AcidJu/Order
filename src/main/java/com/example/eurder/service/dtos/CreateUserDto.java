@@ -67,4 +67,3 @@ public class CreateUserDto {
         return this;
     }
 }
-

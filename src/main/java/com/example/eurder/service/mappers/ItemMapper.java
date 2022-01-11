@@ -18,6 +18,7 @@ public class ItemMapper {
 
     public static ItemDto mapToItemDto(Item item) {
         return new ItemDto()
+                .setId(item.getId())
                 .setName(item.getName())
                 .setDescription(item.getDescription())
                 .setPrice(item.getPrice())
